@@ -43,7 +43,25 @@ pub fn stroke_flat(pixmap: &mut Pixmap, path: &Path, rgb: Rgb, width: f32) {
     stroke_with(pixmap, path, rgb, 1.0, width, LineCap::Butt);
 }
 
-fn stroke_with(pixmap: &mut Pixmap, path: &Path, rgb: Rgb, alpha: f32, width: f32, cap: LineCap) {
+/// Stroke with any line end. Lines thinner than a pixel are drawn one pixel
+/// wide and fainter instead: that looks the same, and tiny-skia's hairline
+/// code trips debug assertions on very thin lines.
+pub fn stroke_with(
+    pixmap: &mut Pixmap,
+    path: &Path,
+    rgb: Rgb,
+    alpha: f32,
+    width: f32,
+    cap: LineCap,
+) {
+    if width <= 0.0 || !width.is_finite() {
+        return;
+    }
+    let (width, alpha) = if width < 1.0 {
+        (1.0, alpha * width)
+    } else {
+        (width, alpha)
+    };
     let stroke = Stroke {
         width,
         line_cap: cap,
@@ -59,9 +77,11 @@ fn stroke_with(pixmap: &mut Pixmap, path: &Path, rgb: Rgb, alpha: f32, width: f3
     );
 }
 
+/// Filled rectangle. Goes through a path: tiny-skia's own anti-aliased
+/// `fill_rect` trips debug assertions on rectangles that stick out of the image.
 pub fn fill_rect(pixmap: &mut Pixmap, x: f32, y: f32, w: f32, h: f32, rgb: Rgb) {
     if let Some(rect) = Rect::from_xywh(x, y, w, h) {
-        pixmap.fill_rect(rect, &paint(rgb, 1.0), Transform::identity(), None);
+        fill(pixmap, &PathBuilder::from_rect(rect), rgb);
     }
 }
 

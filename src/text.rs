@@ -137,9 +137,11 @@ pub fn draw(pixmap: &mut Pixmap, text: &str, x: f32, baseline: f32, style: &Styl
         Transform::identity(),
         None,
     );
-    if style.weight > 0.0 {
+    // Below a pixel the extra weight wouldn't show (and tiny-skia dislikes hairlines)
+    let weight = style.weight * style.size * 0.07;
+    if weight >= 1.0 {
         let stroke = Stroke {
-            width: style.weight * style.size * 0.07,
+            width: weight,
             line_join: tiny_skia::LineJoin::Round,
             ..Default::default()
         };

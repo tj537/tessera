@@ -386,16 +386,13 @@ pub fn render_sized(poster: &Poster, width: u32, height: u32) -> Pixmap {
                 .map(PathBuilder::from_rect),
         };
         if let Some(path) = path {
-            let stroke = tiny_skia::Stroke {
-                width,
-                ..Default::default()
-            };
-            pixmap.stroke_path(
+            paint::stroke_with(
+                &mut pixmap,
                 &path,
-                &paint::paint(ink, 1.0),
-                &stroke,
-                Transform::identity(),
-                None,
+                ink,
+                1.0,
+                width,
+                tiny_skia::LineCap::Butt,
             );
         }
     }

@@ -7,6 +7,7 @@ Generative posters: pick a design, tweak parameters, export PNG. Rust + eframe/e
 | Command | What it does |
 |---|---|
 | `cargo test --release` | all tests (fast) |
+| `cargo test` | the same in debug, like CI – tiny-skia has debug-only assertions (thin hairlines, AA rects outside the image), so run this before pushing drawing changes |
 | `cargo clippy --release --all-targets` | must stay free of warnings |
 | `cargo fmt` | CI checks `cargo fmt --check` |
 | `cargo test --release render_ -- --ignored` | renders every design in every layout and the app window to `target/snapshots/*.png` – look at them after visual changes |

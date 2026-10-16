@@ -206,4 +206,23 @@ mod tests {
             );
         }
     }
+
+    #[test]
+    fn extreme_settings_draw_without_panicking() {
+        // Every knob at its minimum, then at its maximum, on small and odd sizes
+        for design in Design::ALL {
+            for pick in [|s: &ParamSpec| s.min, |s: &ParamSpec| s.max] {
+                let values: Values = design
+                    .specs()
+                    .iter()
+                    .map(|s| (s.key.to_string(), pick(s)))
+                    .collect();
+                // One-colour and many-colour palettes
+                for (palette, (w, h)) in [(1, (1, 1)), (0, (7, 300)), (3, (90, 64))] {
+                    let mut pixmap = Pixmap::new(w, h).unwrap();
+                    design.draw(&mut pixmap, &values, crate::palette::get(palette), 3);
+                }
+            }
+        }
+    }
 }
