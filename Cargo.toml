@@ -3,6 +3,7 @@ name = "tessera"
 version = "0.1.0"
 edition = "2021"
 description = "Generative posters: pick a design, turn the knobs, export a PNG"
+license = "MIT"
 repository = "https://github.com/tj537/tessera"
 
 [dependencies]

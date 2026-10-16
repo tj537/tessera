@@ -61,3 +61,7 @@ Built with [egui](https://github.com/emilk/egui) and
 [tiny-skia](https://github.com/linebender/tiny-skia). Poster text uses the
 fonts that ship with egui: Ubuntu Light (Ubuntu Font Licence) and Hack
 (MIT / Bitstream Vera licence).
+
+## Licence
+
+MIT – see [LICENSE](LICENSE).
