@@ -1,0 +1,6 @@
+# Unix line endings everywhere – also when checking out on Windows.
+* text=auto eol=lf
+
+*.png binary
+*.ico binary
+*.icns binary

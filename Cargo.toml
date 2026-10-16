@@ -1,0 +1,26 @@
+[package]
+name = "tessera"
+version = "0.1.0"
+edition = "2021"
+description = "Generative posters: pick a design, turn the knobs, export a PNG"
+repository = "https://github.com/tj537/tessera"
+
+[dependencies]
+eframe = { version = "0.31", features = ["persistence"] }
+egui-phosphor = "0.9"
+# The fonts egui ships with – also used for the poster text
+epaint_default_fonts = "0.31"
+ab_glyph = "0.2"
+tiny-skia = "0.11"
+png = "0.17"
+rfd = "0.15"
+serde = { version = "1", features = ["derive"] }
+
+[build-dependencies]
+# App icon and version info in the Windows .exe
+winresource = "0.1"
+
+# Smaller, faster binary for the finished app
+[profile.release]
+lto = "thin"
+strip = true
