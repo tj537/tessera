@@ -11,6 +11,15 @@ until you like it, add a title, export a print-ready PNG.
   <img src="docs/images/tiles-circle-white.png" width="32%" alt="Bauhaus design in a circle">
 </p>
 
+## Download
+
+- **macOS** (Apple Silicon): [Tessera-macos-arm64.zip](https://github.com/tj537/tessera/releases/latest/download/Tessera-macos-arm64.zip)
+  – unzip and move `Tessera.app` to *Applications*. The app is only signed
+  locally, so the first launch needs *Open Anyway* in System Settings →
+  Privacy & Security.
+- **Windows** (64-bit): [Tessera-windows-x64.zip](https://github.com/tj537/tessera/releases/latest/download/Tessera-windows-x64.zip)
+  – unzip and start `Tessera.exe`, no install needed.
+
 ## How it works
 
 - **Middle:** the poster, always shown at its real proportions.
